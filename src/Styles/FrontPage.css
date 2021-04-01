@@ -1,0 +1,20 @@
+.user-name {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.log-in {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-group {
+
+}
+
+.list-group-item {
+  display: flex;
+  height: 3rem;
+  margin: 0.5rem;
+  background-color: rgba(211, 211, 211, 0.419);
+}
