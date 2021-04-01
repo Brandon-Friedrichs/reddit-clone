@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
-import UseFirestore from '../Hooks/UseFirestore';
+import UseFirestoreSubreddit from '../Hooks/UseFirestoreSubreddit';
 import PostPreview from './PostPreview';
 
 import '../Styles/FrontPage.css';
 
 export default function FrontPage() {
   const { currentUser } = useAuth();
-  const [posts] = UseFirestore('posts');
+  const { subreddit } = useParams();
+  const [posts] = UseFirestoreSubreddit('posts', subreddit);
 
   const listOfPosts = posts !== null && posts.map((post) => (
     <PostPreview key={post.id} postData={post} />  
@@ -16,7 +17,7 @@ export default function FrontPage() {
 
   return (
     <div>
-      Front Page
+      {subreddit}
       {currentUser !== null ? (
         <div className='user-name'>
           {currentUser.email}

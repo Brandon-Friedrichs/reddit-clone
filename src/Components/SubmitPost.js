@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 export default function SubmitPost() {
   const titleRef = useRef();
   const descriptionRef = useRef();
+  const subredditRef = useRef();
   const history = useHistory();
   const postsRef = firestore.collection('posts');
 
@@ -15,7 +16,8 @@ export default function SubmitPost() {
     try {
       await postsRef.add({
         title: titleRef.current.value,
-        description: descriptionRef.current.value
+        description: descriptionRef.current.value,
+        subreddit: subredditRef.current.value
       });
       history.push('/');
     } catch (error) {
@@ -33,9 +35,13 @@ export default function SubmitPost() {
               <Form.Label>Title</Form.Label>
               <Form.Control type='text' ref={titleRef} required></Form.Control>
             </Form.Group>
-            <Form.Group id='title'>
+            <Form.Group id='description'>
               <Form.Label>Description</Form.Label>
               <Form.Control type='text' ref={descriptionRef} required></Form.Control>
+            </Form.Group>
+            <Form.Group id='subreddit'>
+              <Form.Label>Subreddit</Form.Label>
+              <Form.Control type='text' ref={subredditRef} required></Form.Control>
             </Form.Group>
             <Button type='submit'>Submit Post</Button>
           </Form>

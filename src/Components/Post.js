@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import UseFirestoreDocument from '../Hooks/UseFirestoreDocument';
+import CommentSection from './CommentSection';
 
 export default function Post() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function Post() {
             <p>
               {post.description}
             </p>
-            <Button>Leave Comment</Button>
+            <CommentSection />
           </Card.Body>
         </Card>
       )}
