@@ -1,0 +1,17 @@
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  width: 340px;
+  padding: 8px;
+  margin: 5px;
+  background-color: rgba(176, 196, 222, 0.515);
+  border-radius: 15px;
+}
+
+.profile-tools-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 8px;
+}

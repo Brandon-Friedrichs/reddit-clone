@@ -5,11 +5,12 @@ export default function UseFirestore(collection) {
   const [docs, setDocs] = useState(null)
 
   useEffect(() => {
-    const query = firestore.collection(collection).limit(10);
+    const query = firestore.collection(collection);
     const unsub = query.onSnapshot((snapshot) => {
       const documents = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data(), };
       });
+      console.log('useFirestore has fired')
       setDocs(documents);
     });
     return () => unsub();

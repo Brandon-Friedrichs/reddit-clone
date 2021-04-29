@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 import '../Styles/SubmitPost.css';
 
-export default function SubmitPost() {
+export default function SubmitLinkPost() {
   const { currentUser } = useAuth();
+  const [postUrl, setPostUrl] = useState('');
   const [postTitle, setPostTitle] = useState('');
   const [postText, setPostText] = useState('');
   const [postLayer, setPostLayer] = useState('');
@@ -17,6 +18,7 @@ export default function SubmitPost() {
     e.preventDefault()
     try {
       await postsRef.add({
+        url: postUrl,
         title: postTitle,
         description: postText,
         subreddit: postLayer,
@@ -34,7 +36,18 @@ export default function SubmitPost() {
       <h2>Submit Post</h2>
       <form className='post-form' onSubmit={handleSubmit}>
         <label>
-          Title: {' '}
+          Url {' '}
+          <br />
+          <input 
+            className='post-url-input'
+            type='text'
+            value={postUrl}
+            onChange={(e) => setPostUrl(e.target.value)}
+            required />
+        </label>
+
+        <label>
+          Title {' '}
           <br />
           <input 
             className='post-title-input'
@@ -45,7 +58,7 @@ export default function SubmitPost() {
         </label>
 
         <label>
-          Text: {' '}
+          Text {' '}
           <br />
           <textarea 
               className='post-text-input'
@@ -55,7 +68,7 @@ export default function SubmitPost() {
         </label>
 
         <label>
-          Layer: {' '}
+          Layer {' '}
           <br />
           <input 
             className='post-layer-input'

@@ -1,6 +1,43 @@
-.user-name {
+.banner-container {
+  display: flex;
+  height: 3rem;
+  padding: 0 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: rgba(146, 203, 240, 0.637);
+  border-bottom: 2px solid rgba(144, 164, 170, 0.542);
+}
+
+.banner-title {
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+
+.layer-icon {
+  margin: 0 10px;
+}
+
+.user-info-container {
   display: flex;
   justify-content: flex-end;
+  padding: 6px;
+  font-size: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.453);
+  border-radius: 15px 15px 0 0;
+}
+
+.log-out-btn {
+  cursor: pointer;
+}
+.log-out-btn:hover {
+  text-decoration: underline;
+}
+
+.vertical-spacer {
+  height: 0.9rem;
+  margin: 0 5px;
+  align-self: center;
+  border-left: 2px solid rgba(0, 0, 0, 0.248);
 }
 
 .log-in {
@@ -8,13 +45,18 @@
   justify-content: flex-end;
 }
 
-.list-group {
-
-}
-
-.list-group-item {
+.posts-container {
   display: flex;
-  height: 3rem;
-  margin: 0.5rem;
-  background-color: rgba(211, 211, 211, 0.419);
+  flex-direction: column;
+
 }
+
+.posts {
+  display: flex;
+  grid-area: posts;
+  flex-direction: column;
+}
+
+
+
+

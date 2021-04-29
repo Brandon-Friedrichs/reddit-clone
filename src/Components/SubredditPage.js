@@ -1,13 +1,13 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom';
-import { useAuth } from '../Contexts/AuthContext';
+import { useParams } from 'react-router-dom';
 import UseFirestoreSubreddit from '../Hooks/UseFirestoreSubreddit';
+import Banner from './Banner';
+import SideBar from './SideBar';
 import PostPreview from './PostPreview';
 
 import '../Styles/FrontPage.css';
 
 export default function FrontPage() {
-  const { currentUser } = useAuth();
   const { subreddit } = useParams();
   const [posts] = UseFirestoreSubreddit('posts', subreddit);
 
@@ -16,23 +16,16 @@ export default function FrontPage() {
   ));
 
   return (
-    <div>
-      {subreddit}
-      {currentUser !== null ? (
-        <div className='user-name'>
-          {currentUser.email}
-        </div>
-      ) : (
-        <Link className='log-in' to='/login'>Log in to account</Link>
-      )}
-
-      <Link to='/submitpost'>Submit Post</Link>
+    <>
+      <Banner />
+      
+      <SideBar />
 
       {listOfPosts !== null && listOfPosts.length < 1 ? (
         <span>No Posts Found</span>
-      ) : (
-        listOfPosts
+        ) : (
+          listOfPosts
       )}
-    </div>
+    </>
   )
 }

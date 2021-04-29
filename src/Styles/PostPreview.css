@@ -1,0 +1,52 @@
+.post-preview-container {
+  display: flex;
+  min-height: 1px;
+  margin: 1.25rem;
+  border: 1px solid gray;
+  align-items: center;
+}
+
+.icon-container {
+  margin: 0 20px 0 5px;
+  background-color: rgba(128, 128, 128, 0.268);
+  border-radius: 50%;
+  color: black;
+}
+
+.text-icon {
+  position: relative;
+  top: 2px;
+  font-size: 65px;
+  padding: 14px;
+}
+
+.link-icon {
+  font-size: 65px;
+  padding: 5px;
+}
+
+.post-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-preview-info {
+  font-size: 0.9rem;
+}
+
+.post-preview-func,
+.comments-link,
+.comments-link:hover {
+  color: gray;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0 8px 0 0;
+}
+
+.delete-post-btn {
+  cursor: pointer;
+}
+.delete-post-btn:hover {
+  text-decoration: underline;
+}

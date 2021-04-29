@@ -6,7 +6,7 @@ export default function NavigationBar() {
   return (
     <>
       <Navbar bg='light' >
-        <Link to='/'>Front Page</Link>
+        <Link to='/'>Top Layer</Link>
       </Navbar>
     </>
   )

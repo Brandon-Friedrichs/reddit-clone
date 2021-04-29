@@ -1,37 +1,31 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { useAuth } from '../Contexts/AuthContext';
+import React from 'react';
 import UseFirestore from '../Hooks/UseFirestore';
+import Banner from './Banner';
+import SideBar from './SideBar';
 import PostPreview from './PostPreview';
 
 import '../Styles/FrontPage.css';
 
 export default function FrontPage() {
-  const { currentUser } = useAuth();
   const [posts] = UseFirestore('posts');
+  const uniqueLayers = posts !== null && [...new Set(posts.map(post => post.subreddit))];
+  console.log(uniqueLayers)
 
   const listOfPosts = posts !== null && posts.map((post) => (
     <PostPreview key={post.id} postData={post} />  
   ));
 
   return (
-    <div>
-      Front Page
-      {currentUser !== null ? (
-        <div className='user-name'>
-          {currentUser.email}
-        </div>
-      ) : (
-        <Link className='log-in' to='/login'>Log in to account</Link>
-      )}
+    <>
+      <Banner />
 
-      <Link to='/submitpost'>Submit Post</Link>
+      <SideBar uniqueLayers={uniqueLayers} />
 
       {listOfPosts !== null && listOfPosts.length < 1 ? (
         <span>No Posts Found</span>
-      ) : (
-        listOfPosts
+        ) : (
+          listOfPosts
       )}
-    </div>
+    </>
   )
 }
