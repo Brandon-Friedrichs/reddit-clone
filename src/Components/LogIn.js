@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
+import Banner from './Banner';
 
 export default function LogIn() {
   const emailRef = useRef();
@@ -26,6 +27,7 @@ export default function LogIn() {
 
   return (
     <>
+      <Banner bannerHeader='layer' />
       <Card>
         <Card.Body>
           <h2>Log In</h2>

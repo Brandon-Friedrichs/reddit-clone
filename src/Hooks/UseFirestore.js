@@ -10,7 +10,6 @@ export default function UseFirestore(collection) {
       const documents = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data(), };
       });
-      console.log('useFirestore has fired')
       setDocs(documents);
     });
     return () => unsub();

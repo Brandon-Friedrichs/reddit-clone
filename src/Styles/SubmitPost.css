@@ -5,8 +5,10 @@
 }
 
 label {
-  background-color: rgba(157, 157, 157, 0.289);
-  padding: 5px 0 10px 5px;
+  background-color: rgba(115, 152, 172, 0.289);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 .post-title-input {

@@ -8,10 +8,8 @@ export default function VoteOnPost({ postData, postId }) {
   const [score, setScore] = useState(0);
   const [currentVote, setCurrentVote] = useState(0);
   
-  // TODO: Could be simplified? Possibly made to get rather than snapshot.
   useEffect(() => {
     const scoreRef = firestore.collection('posts').doc(postId).collection('votes');
-    console.log('voteonpost is firing');
     const unsub = scoreRef.onSnapshot((snapshot) => {
       const votes = snapshot.docs.map((doc) =>{
         return { ...doc.data() };
@@ -31,7 +29,6 @@ export default function VoteOnPost({ postData, postId }) {
   }, [postId, currentUser])
 
   function voteUp() {
-    console.log('upvoting')
     if (currentUser) {
       if (currentVote === 1) {
         removeVote();
@@ -47,7 +44,6 @@ export default function VoteOnPost({ postData, postId }) {
   }
 
   function voteDown() {
-    console.log('downvoting')
     if (currentUser) {
       if (currentVote === -1) {
         removeVote();

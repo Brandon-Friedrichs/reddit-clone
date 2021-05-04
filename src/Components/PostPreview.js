@@ -9,16 +9,13 @@ import '../Styles/PostPreview.css';
 export default function PostPreview({ postData }) {
   const createdAt = (postData.timestamp.toDate().toDateString() + ' at ' + postData.timestamp.toDate().toLocaleTimeString());
 
-  //TODO: Eliminate props being sent to VoteOnPost component.
-  //           <VoteOnPost postData={postData} postId={postData.id} />
-
   return (
     <div className='post-preview-container'>
 
           <VoteOnPost postData={postData} postId={postData.id} />
 
           {postData.url ? (
-            <a target='_blank' href={postData.url}>
+            <a target='_blank' href={postData.url} rel="noreferrer">
               <div className='icon-container'>
                 <Link45deg className='link-icon'/>
               </div>
@@ -33,7 +30,7 @@ export default function PostPreview({ postData }) {
 
           <div className='post-preview'>
             {postData.url ? (
-              <a target='_blank' href={postData.url}>{postData.title}</a>
+              <a target='_blank' href={postData.url} rel="noreferrer">{postData.title}</a>
             ) : (
               <Link to={`/layer/${postData.subreddit}/${postData.id}`} >
                 {postData.title}
@@ -43,9 +40,9 @@ export default function PostPreview({ postData }) {
             <span className='post-preview-info'>
               Submitted on {createdAt} by {' '}
               <Link to={`/user/${postData.author}`}>{postData.author}</Link>
-              {' '} to
+              {' '} to the
               <Link to={`/layer/${postData.subreddit}`} >
-                {` r/${postData.subreddit}`}
+                {` ${postData.subreddit} layer`}
               </Link>
             </span>
 

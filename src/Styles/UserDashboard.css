@@ -5,8 +5,13 @@
   width: 340px;
   padding: 8px;
   margin: 5px;
-  background-color: rgba(176, 196, 222, 0.515);
+  text-align: center;
+  background-color: #81a6cea3;
   border-radius: 15px;
+}
+
+.username {
+  border-bottom: 1px solid black;
 }
 
 .profile-tools-container {
@@ -14,4 +19,21 @@
   justify-content: center;
   gap: 25px;
   margin-top: 8px;
+}
+
+.log-out-btn {
+  color: white;
+  background-color: #51657ba3;
+  padding: 5px 10px;
+  margin-bottom: 8px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  transition-duration: 0.3s;
+}
+
+.log-out-btn:hover {
+  background-color: #51657bee;
+  color: white;
+  text-decoration: none;
 }

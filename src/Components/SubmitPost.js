@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { firestore, timestamp } from '../firebase';
 import { useAuth } from '../Contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
+import Banner from './Banner';
 
 import '../Styles/SubmitPost.css';
 
@@ -15,22 +16,27 @@ export default function SubmitPost() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    try {
-      await postsRef.add({
-        title: postTitle,
-        description: postText,
-        subreddit: postLayer,
-        author: currentUser.email,
-        timestamp: timestamp
-      });
-      history.push('/');
-    } catch (error) {
-      console.error(error);
+    if (currentUser !== null) {
+      try {
+        await postsRef.add({
+          title: postTitle,
+          description: postText,
+          subreddit: postLayer,
+          author: currentUser.email,
+          timestamp: timestamp
+        });
+        history.push('/');
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      alert('You must be logged in to submit a post')
     }
   }
 
   return (
     <div className='submit-post-container'>
+      <Banner bannerHeader='layer' />
       <h2>Submit Post</h2>
       <form className='post-form' onSubmit={handleSubmit}>
         <label>

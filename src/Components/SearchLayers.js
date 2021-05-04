@@ -1,19 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { firestore } from '../firebase';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import UseFirestore from '../Hooks/UseFirestore';
 
 export default function SearchLayers({ uniqueLayers = [] }) {
   const [searchQuery, setSearchQuery] = useState('');
-  console.log(uniqueLayers)
   const filteredLayers = filterLayers(uniqueLayers, searchQuery);
 
   function filterLayers(allLayers, query) {
     if (query === '') {
       return [];
     }
-    console.log('allLayers', allLayers)
     return allLayers.filter((layer) => {
       const layerName = layer.toLowerCase();
       return layerName.includes(query);

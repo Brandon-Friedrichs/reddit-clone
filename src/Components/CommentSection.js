@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { firestore, timestamp } from '../firebase';
 import { useParams } from 'react-router-dom';
@@ -15,7 +15,6 @@ export default function CommentSection() {
   useEffect(() => {
     const commentsRef = firestore.collection('posts').doc(id).collection('comments');
     const unsub = commentsRef.onSnapshot((snapshot) => {
-      console.log('Get comments useEffect fired');
       const documents = snapshot.docs.map((doc) => {
         return { id: doc.id, ...doc.data(), };
       });
@@ -30,17 +29,21 @@ export default function CommentSection() {
 
   async function submitComment(e) {
     e.preventDefault();
-    const commentsRef = firestore.collection('posts').doc(id).collection('comments');
-    try {
-      await commentsRef.add({
-        author: currentUser.email,
-        comment: newComment,
-        timestamp: timestamp
-      });
-      setNewComment('');
-    } catch (error) {
-      console.error(error);
-    } 
+    if (currentUser !== null) {
+      const commentsRef = firestore.collection('posts').doc(id).collection('comments');
+      try {
+        await commentsRef.add({
+          author: currentUser.email,
+          comment: newComment,
+          timestamp: timestamp
+        });
+        setNewComment('');
+      } catch (error) {
+        console.error(error);
+      } 
+    } else {
+      alert('You must be logged in to submit a post')
+    }
   }
 
   return (

@@ -1,25 +1,25 @@
-import React from 'react'
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import UseFirestoreSubreddit from '../Hooks/UseFirestoreSubreddit';
 import Banner from './Banner';
 import SideBar from './SideBar';
 import PostPreview from './PostPreview';
 
 import '../Styles/FrontPage.css';
 
-export default function FrontPage() {
+export default function SubredditPage({ posts, uniqueLayers }) {
   const { subreddit } = useParams();
-  const [posts] = UseFirestoreSubreddit('posts', subreddit);
 
-  const listOfPosts = posts !== null && posts.map((post) => (
-    <PostPreview key={post.id} postData={post} />  
-  ));
+  const listOfPosts = posts !== null && posts.filter((post) => post.subreddit === subreddit)
+    .map((post) => (
+      <PostPreview key={post.id} postData={post} />  
+    )
+  );
 
   return (
     <>
-      <Banner />
+      <Banner bannerHeader={subreddit} />
       
-      <SideBar />
+      <SideBar uniqueLayers={uniqueLayers} />
 
       {listOfPosts !== null && listOfPosts.length < 1 ? (
         <span>No Posts Found</span>

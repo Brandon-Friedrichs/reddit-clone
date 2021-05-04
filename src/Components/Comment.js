@@ -23,7 +23,7 @@ export default function Comment({ commentData, parentPost }) {
       <p className='comment-text'>
         {commentData.comment}
       </p>
-      {currentUser.email === commentData.author ? (
+      {currentUser !== null && currentUser.email === commentData.author ? (
         <span className='delete-comment-btn' onClick={deletePost} >
           Delete
         </span>

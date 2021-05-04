@@ -11,16 +11,13 @@ import { ChatSquareText, Link45deg } from 'react-bootstrap-icons';
 import '../Styles/Post.css';
 
 export default function Post() {
-  const { subreddit, id } = useParams();
+  const { id } = useParams();
   const postData = UseFirestoreDocument('posts', id);
-  console.log(postData)
-  const createdAt = 'test' //(post.timestamp.toDate().toDateString() + ' at ' + post.timestamp.toDate().toLocaleTimeString());
+  const createdAt = postData !== null && (postData.timestamp.toDate().toDateString() + ' at ' + postData.timestamp.toDate().toLocaleTimeString());
 
-  // TODO: Improve loading screen while post data is fetched.
-  // TODO: Possibly eliminate need to pass params to voteOnPost and comment component.
   return (
     <>
-      <Banner />
+      <Banner bannerHeader='layer' />
       <SideBar />
 
       {postData === null ? (
@@ -32,7 +29,7 @@ export default function Post() {
             <VoteOnPost postData={postData} postId={id} />
 
             {postData.url ? (
-              <a target='_blank' href={postData.url}>
+              <a target='_blank' href={postData.url} rel="noreferrer">
                 <div className='icon-container'>
                   <Link45deg className='link-icon'/>
                 </div>
@@ -48,7 +45,7 @@ export default function Post() {
 
           <div className='post-details'>
             {postData.url ? (
-              <a target='_blank' href={postData.url}>{postData.title}</a>
+              <a target='_blank' href={postData.url} rel="noreferrer">{postData.title}</a>
             ) : (
               <Link to={`/layer/${postData.subreddit}/${postData.id}`} >
                 {postData.title}
@@ -58,15 +55,19 @@ export default function Post() {
             <span className='post-preview-info'>
               Submitted on {createdAt} by {' '}
               <Link to={`/user/${postData.author}`}>{postData.author}</Link>
-              {' '} to
+              {' '} to the
               <Link to={`/layer/${postData.subreddit}`} >
-                {` layer/${postData.subreddit}`}
+                {` ${postData.subreddit} layer`}
               </Link>
             </span>
-
-            <p className='post-text'>
-              {postData.description}
-            </p>
+            
+            {postData.description !== '' ? (
+              <p className='post-text'>
+                {postData.description}
+              </p>
+              ) : (
+                ''
+            )}
 
             <span className='post-preview-func'>
               <Link className='comments-link' to={`/layer/${postData.subreddit}/${postData.id}`} >

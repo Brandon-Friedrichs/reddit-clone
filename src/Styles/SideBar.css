@@ -3,7 +3,10 @@
   flex-direction: column;
   float: right;
   width: 340px;
-  margin: 5px;
+  margin: 1.25rem 5px;
+  padding: 25px 5px;
+  background-color: rgba(119, 136, 153, 0.501);
+  border-radius: 10px;
 }
 
 .submit-post-btn {
@@ -25,7 +28,6 @@
 
 .search-bar {
   display: flex;
-  
 }
 
 .searchLayers-input {

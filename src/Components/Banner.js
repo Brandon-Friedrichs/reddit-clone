@@ -1,33 +1,32 @@
 import React from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 import { LayersHalf } from 'react-bootstrap-icons';
 
-export default function Banner() {
+export default function Banner({ bannerHeader }) {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const { subreddit } = useParams();
 
   async function handleLogout() {
-    //setError('');
     try {
       await logout();
       history.push('/login');
     } catch {
-      //setError('Failed to log out');
+      alert('Failed to log out');
     }
   }
 
   return (
     <div className='banner-container'>
-      <h2 className='banner-title'>
-        {subreddit !== undefined ? (
-          <div className='banner-title-icon'>
+      <h2 className='banner-title-container'>
+        {bannerHeader !== undefined ? (
+          <div className='banner-title'>
             <LayersHalf className='layer-icon' />
-            {subreddit}
+            {bannerHeader}
+            <Link className='top-layer-link' to='/'>Top Layer</Link>
           </div>
         ) : (
-          <div className='banner-title-icon'>
+          <div className='banner-title'>
             <LayersHalf className='layer-icon' />
             Layer
           </div>
@@ -38,7 +37,7 @@ export default function Banner() {
         <div className='user-info-container'>
           <Link to={`/user/${currentUser.email}`}>{currentUser.email}</Link>
           <div className='vertical-spacer'></div>
-          <span className='log-out-btn' onClick={handleLogout}>Log Out</span>
+          <span className='banner-log-out-btn' onClick={handleLogout}>Log Out</span>
         </div>
       ) : (
         <div className='user-info-container'>
